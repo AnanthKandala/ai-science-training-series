@@ -91,7 +91,7 @@ class ConvNextBlock(nn.Module):
         self.conv1 = nn.Conv2d(in_channels=in_channels, 
                                      out_channels=in_channels, 
                                      groups=in_channels,
-                                     kernel_size=[3,3],
+                                     kernel_size=[7,7],
                                      padding='same' )
 
         self.norm = nn.LayerNorm([in_channels, *shape])
@@ -128,9 +128,9 @@ class Classifier(nn.Module):
         self.stem = nn.Conv2d(in_channels=3,
                                     out_channels=n_initial_filters,
                                     kernel_size=1,
-                                    stride=2)
+                                    stride=1)
         
-        current_shape = [16, 16]
+        current_shape = [32, 32]
 
         self.norm1 = nn.LayerNorm([n_initial_filters,*current_shape])
         # self.norm1 = WrappedLayerNorm()
