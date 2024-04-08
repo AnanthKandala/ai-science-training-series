@@ -142,17 +142,19 @@ class Classifier(nn.Module):
             # Add a convnext block series:
             for _ in range(blocks_per_stage):
                 self.layers.append(ConvNextBlock(in_channels=current_n_filters, shape=current_shape))
+                self.layers.append(nn.Dropout(0.1))
             # Add a downsampling layer:
             if i != n_stages - 1:
                 # Skip downsampling if it's the last layer!
                 self.layers.append(Downsampler(
                     in_channels=current_n_filters, 
-                    out_channels=2*current_n_filters,
+                    out_channels=4*current_n_filters,
                     shape = current_shape,
                     )
                 )
+                self.layers.append(nn.Dropout(0.1))
                 # Double the number of filters:
-                current_n_filters = 2*current_n_filters
+                current_n_filters = 4*current_n_filters
                 # Cut the shape in half:
                 current_shape = [ cs // 2 for cs in current_shape]
 

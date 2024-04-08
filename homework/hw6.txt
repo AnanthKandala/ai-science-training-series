@@ -1,0 +1,18 @@
+/home/swimzebra/ai_homework/wordplay/src/outputs/runs/shakespeare/pytorch/DDP/2024-04-07/13-34-38/wandb/run-20240407_133443-g8gunqm8/logs
+
+job_link: https://wandb.ai/universityofflorida/WordPlay/runs/tsa5ksac?nw=nwuseranathkandala
+
+
+mkdir -p venvs/polaris/2023-10-04
+python3 -m venv venvs/polaris/2023-10-04 --system-site-packages
+source venvs/polaris/2023-10-04/bin/activate
+
+source ezpz/src/ezpz/bin/savejobenv > /tmp/savejobenv.log 2>&1  # || exit
+source ezpz/src/ezpz/bin/getjobenv  # || exit
+
+
+
+
+cd src/wordplay
+launch python3 __main__.py +experiment=shakespeare data=shakespeare train.backend=DDP train.max_iters=100 train.log_interval=5 train.compile=false
+
